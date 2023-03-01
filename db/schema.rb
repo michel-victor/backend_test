@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_173535) do
 
   create_table "purchase_options", force: :cascade do |t|
     t.integer "content_id", null: false
-    t.decimal "price", precision: 10, scale: 2
+    t.decimal "price", precision: 8, scale: 2
     t.integer "quality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_173535) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "episodes", "seasons"
+  add_foreign_key "episodes", "contents", column: "season_id"
   add_foreign_key "purchase_options", "contents"
   add_foreign_key "purchases", "purchase_options"
   add_foreign_key "purchases", "users"
