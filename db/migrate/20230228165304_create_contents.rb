@@ -4,7 +4,7 @@ class CreateContents < ActiveRecord::Migration[7.0]
       t.string :title
       t.text :plot
       t.integer :number
-      t.string :_type
+      t.string :type
 
       t.timestamps
     end

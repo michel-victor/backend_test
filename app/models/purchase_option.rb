@@ -4,4 +4,6 @@ class PurchaseOption < ApplicationRecord
   has_many :users, through: :purchases
 
   enum quality: [:sd, :hd]
+
+  validates :price, presence: true, uniqueness: { scope: [:content, :quality] }
 end

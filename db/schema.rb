@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_173535) do
     t.string "title"
     t.text "plot"
     t.integer "number"
-    t.string "_type"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_173535) do
 
   create_table "purchase_options", force: :cascade do |t|
     t.integer "content_id", null: false
-    t.decimal "price", precision: 6, scale: 2
+    t.decimal "price", precision: 10, scale: 2
     t.integer "quality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
