@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  user:
+    purchase:
+      create_error: The purchase could not be made.
+      already_available_content: The content is already available in the user library.
+
