@@ -10,4 +10,8 @@ class Purchase < ApplicationRecord
   def alive?
     Time.current.between?(created_at, created_at + 2.days)
   end
+
+  def expires
+    created_at + 2.days
+  end
 end
