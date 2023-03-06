@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.order(:created_at)
+    # Ordered by createed_at from default_scope in model
+    @movies = Movie.all
   end
 end
