@@ -6,7 +6,22 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP, if: :email? }
 
+  def set_library
+    if Rails.cache.instance_variable_get(:@data).keys.empty?
+      begin
+        Purchase.alives.each do |purchase|
+          Rails.cache.fetch([purchase.user, purchase], namespace: 'library', expires_in: purchase.expires) do
+            { content_type: purchase.purchase_option.content.type, content_title: purchase.purchase_option.content.title, quality: purchase.purchase_option.quality, expires: purchase.expires }
+          end
+        end
+      rescue
+        I18n.t 'user.library.set_error'
+      end
+    end
+  end
+
   def library
+    set_library
     Rails.cache.instance_variable_get(:@data).keys.map { |key| key if key.include?("library:users/#{id}/") }.compact.collect { |key| Rails.cache.read(key) }.compact
   end
 
