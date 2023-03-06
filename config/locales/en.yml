@@ -5,4 +5,5 @@ en:
       already_available_content: The content is already available in the user library.
     library:
       add_error: The content could not be added to your library.
+      set_error: The library could not be generated.
 
