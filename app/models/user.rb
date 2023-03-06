@@ -10,7 +10,7 @@ class User < ApplicationRecord
   end
 
   def can_purchase?(content)
-    purchases.alives.contents.exclude? content
+    purchases.alives.contents.exclude?(content.instance_of?(Content) ? content : Content.find_by(id: content))
   end
 
   def purchase(content:, quality:)
@@ -18,10 +18,12 @@ class User < ApplicationRecord
       if (purchase = purchases.create(purchase_option: PurchaseOption.find_by(content:, quality:)))
         begin
           Rails.cache.fetch([self, purchase], namespace: 'library', expires_in: purchase.expires) do
-            { content_type: content.type, content_title: content.title, quality: quality, expires: purchase.expires }
+            { content_type: purchase.content.type, content_title: purchase.content.title, quality: quality, expires: purchase.expires }
           end
         rescue
           I18n.t 'user.library.add_error'
+        else
+          purchase
         end
       else
         I18n.t 'user.purchase.create_error'

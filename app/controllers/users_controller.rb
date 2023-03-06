@@ -5,10 +5,8 @@ class UsersController < ApplicationController
   end
 
   def purchase
-    @user = User.new(user_params)
-
-    if @user.save
-      render :show, status: :created, location: @user
+    if (@purchase = @user.purchase(content: params[:content], quality: params[:quality]))
+      render :purchase, status: :created#, location: @purchase
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -22,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def user_params
-    params.require(:user).permit(:email)
-  end
+  # def purchase_params
+  #   params.require(:user).permit(:id, :conten, :quality)
+  # end
 end
