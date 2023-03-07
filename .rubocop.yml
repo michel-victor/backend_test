@@ -87,3 +87,5 @@ Style/StringLiteralsInInterpolation:
   Enabled: false
 Style/NestedParenthesizedCalls:
   Enabled: false
+Style/RedundantBegin:
+  Enabled: false

@@ -1,9 +1,7 @@
 en:
-  user:
+  errors:
     purchase:
-      create_error: The purchase could not be made.
-      already_available_content: The content is already available in the user library.
+      already_available_content: is already available in the user library
     library:
-      add_error: The content could not be added to your library.
-      set_error: The library could not be generated.
-
+      write: The content could not be added to your library
+      reload: The library could not be generated

@@ -5,46 +5,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP, if: :email? }
 
-  def set_library
-    if Rails.cache.instance_variable_get(:@data).keys.empty?
-      begin
-        Purchase.alives.each do |purchase|
-          Rails.cache.fetch([purchase.user, purchase], namespace: 'library', expires_in: purchase.expires) do
-            { content_type: purchase.purchase_option.content.type, content_title: purchase.purchase_option.content.title, quality: purchase.purchase_option.quality, expires: purchase.expires }
-          end
-        end
-      rescue
-        I18n.t 'user.library.set_error'
-      end
-    end
-  end
-
   def library
-    set_library
+    Purchase.reload_library
     Rails.cache.instance_variable_get(:@data).keys.map { |key| key if key.include?("library:users/#{id}/") }.compact.collect { |key| Rails.cache.read(key) }.compact
-  end
-
-  def can_purchase?(content)
-    purchases.alives.contents.exclude?(content.instance_of?(Content) ? content : Content.find_by(id: content))
-  end
-
-  def purchase(content:, quality:)
-    if can_purchase?(content)
-      if (purchase = purchases.create(purchase_option: PurchaseOption.find_by(content:, quality:)))
-        begin
-          Rails.cache.fetch([self, purchase], namespace: 'library', expires_in: purchase.expires) do
-            { content_type: purchase.content.type, content_title: purchase.content.title, quality: quality, expires: purchase.expires }
-          end
-        rescue
-          I18n.t 'user.library.add_error'
-        else
-          purchase
-        end
-      else
-        I18n.t 'user.purchase.create_error'
-      end
-    else
-      I18n.t('user.purchase.already_available_content')
-    end
   end
 end
