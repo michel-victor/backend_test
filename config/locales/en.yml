@@ -1,7 +1,8 @@
 en:
   errors:
-    purchase:
-      already_available_content: is already available in the user library
-    library:
-      write: The content could not be added to your library
-      reload: The library could not be generated
+    messages:
+      purchase:
+        already_available_content: is already available in the user library
+      library:
+        write: The content could not be added to your library
+        reload: The library could not be generated

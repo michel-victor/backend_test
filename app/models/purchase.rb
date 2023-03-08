@@ -7,7 +7,7 @@ class Purchase < ApplicationRecord
   scope :purchase_options, -> { map(&:purchase_option) }
   scope :contents, -> { purchase_options.map(&:content) }
 
-  validate :already_available_content
+  validate :already_available_content_for_user
 
   def alive?
     Time.current.between?(created_at, created_at + 2.days)
@@ -20,13 +20,15 @@ class Purchase < ApplicationRecord
   def write_in_user_library
     begin
       Rails.cache.fetch([user, self], namespace: 'library', expires_in: expires) do
-        { content_type: purchase_option.content.type,
+        {
+          content_type: purchase_option.content.type,
           content_title: purchase_option.content.title,
           quality: purchase_option.quality,
-          expires: expires }
+          expires: expires
+        }
       end
     rescue
-      I18n.t 'errors.library.write'
+      I18n.t 'errors.messages.library.write'
     end
   end
 
@@ -36,11 +38,16 @@ class Purchase < ApplicationRecord
         begin
           alives.each do |purchase|
             Rails.cache.fetch([purchase.user, purchase], namespace: 'library', expires_in: purchase.expires) do
-              { content_type: purchase.purchase_option.content.type, content_title: purchase.purchase_option.content.title, quality: purchase.purchase_option.quality, expires: purchase.expires }
+              {
+                content_type: purchase.purchase_option.content.type,
+                content_title: purchase.purchase_option.content.title,
+                quality: purchase.purchase_option.quality,
+                expires: purchase.expires
+              }
             end
           end
         rescue
-          I18n.t 'errors.library.reload'
+          I18n.t 'errors.messages.library.reload'
         end
       end
     end
@@ -48,9 +55,9 @@ class Purchase < ApplicationRecord
 
   private
 
-  def already_available_content
-    if user.purchases.alives.contents.include?(content.instance_of?(Content) ? content : Content.find_by(id: content))
-      errors.add :content, I18n.t('errors.purchase.already_available_content')
+  def already_available_content_for_user
+    if Purchase.where(user:).alives.contents.include?(content.instance_of?(Content) ? content : Content.find_by(id: content))
+      errors.add :content, I18n.t('errors.messages.purchase.already_available_content')
     end
   end
 end

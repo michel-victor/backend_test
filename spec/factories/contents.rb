@@ -3,6 +3,6 @@ FactoryBot.define do
     title { "MyString" }
     plot { "MyText" }
     number { 1 }
-    _type { "MyString" }
+    type { "MyString" }
   end
 end

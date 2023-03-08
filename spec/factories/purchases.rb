@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :purchase do
-    user { nil }
-    purchase_option { nil }
+    association :user, factory: :user
+    association :purchase_option, factory: :purchase_option
   end
 end

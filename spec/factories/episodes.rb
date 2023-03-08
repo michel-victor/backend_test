@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :episode do
-    season { nil }
-    title { "MyString" }
-    plot { "MyText" }
+    association :season, factory: :season
+    title { "My episode" }
+    plot { "My episode is awesome." }
     number { 1 }
   end
 end

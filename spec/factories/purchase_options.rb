@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :purchase_option do
-    content { nil }
+    association :content, factory: :movie
     price { "9.99" }
-    quality { 1 }
+    quality { "sd" }
   end
 end

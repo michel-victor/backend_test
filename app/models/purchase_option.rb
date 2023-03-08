@@ -5,5 +5,6 @@ class PurchaseOption < ApplicationRecord
 
   enum quality: [:sd, :hd]
 
-  validates :price, presence: true, uniqueness: { scope: [:content, :quality] }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }, uniqueness: { scope: [:content_id, :quality] }
+  validates :content, uniqueness: { scope: :quality }
 end
