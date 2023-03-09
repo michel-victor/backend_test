@@ -8,13 +8,13 @@ The solution has been implemented on [Ruby on Rails](https://rubyonrails.org), f
 
 After analyzing the problem, it was decided to use a [Single Table Inheritance (STI)](https://guides.rubyonrails.org/association_basics.html#single-table-inheritance-sti) architecture for purchable content.
 
--> ERD STI Image <-
+![Image](https://user-images.githubusercontent.com/20050874/224112467-a4055f61-13fb-4327-b41f-59aa2e78289a.jpg)
 
 ## Alternative solution
 
 An alternative solution to Single Table Inheritance (STI) could be a [Polymorphic Association](https://guides.rubyonrails.org/association_basics.html#polymorphic-associations) as shown in the following ERD. This solution was also analyzed, but as it was a selection test, it was assumed that the skills in working with inheritances were wanted.
 
--> Alternative ERD STI Image <-
+![Image](https://user-images.githubusercontent.com/20050874/224112550-c0934590-9ad0-4431-92e0-e544c03a8612.jpg)
 
 ### Relations
 
@@ -341,4 +341,4 @@ Use Docker Compose to set up Dockerfile depending on the needs of the applicatio
 
 ### Workflow
 
--> Workflow Image <-
+![Image](https://user-images.githubusercontent.com/20050874/224112813-a776393c-26ac-491d-9992-ac3f43c1b419.jpg)
