@@ -10,11 +10,243 @@ After analyzing the problem, it was decided to use a [Single Table Inheritance (
 
 ![Image](https://user-images.githubusercontent.com/20050874/224112467-a4055f61-13fb-4327-b41f-59aa2e78289a.jpg)
 
-## Alternative solution
+### Alternative solution
 
 An alternative solution to Single Table Inheritance (STI) could be a [Polymorphic Association](https://guides.rubyonrails.org/association_basics.html#polymorphic-associations) as shown in the following ERD. This solution was also analyzed, but as it was a selection test, it was assumed that the skills in working with inheritances were wanted.
 
 ![Image](https://user-images.githubusercontent.com/20050874/224112550-c0934590-9ad0-4431-92e0-e544c03a8612.jpg)
+
+## API
+
+The export file of a [Postman Collection](https://github.com/michel-victor/backend_test/blob/develop/postman_collection.json) has been added to the project to facilitate the testing of the API.
+
+### Endpoint to return the movies, ordered by creation
+
+`http://localhost:3000/movies`
+
+Response:
+
+```
+{
+    "movies": [
+        {
+            "id": integer,
+            "title": string,
+            "plot": text,
+            "created_at": time,
+            "updated_at": time
+        }
+    ]
+}
+```
+
+Sample:
+
+```
+{
+    "movies": [
+        {
+            "id": 1,
+            "title": "Full Metal Jacket",
+            "plot": "Corrupti amet id. Vel eos dolore. Eaque omnis accusamus.",
+            "created_at": "2023-03-06T17:26:15.768Z",
+            "updated_at": "2023-03-06T17:26:15.768Z"
+        }
+    ]
+}
+```
+
+### Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number
+
+`http://localhost:3000/seasons`
+
+Response:
+
+```
+{
+    "seasons": [
+        {
+            "id": integer,
+            "title": string,
+            "plot": text,
+            "number": integer,
+            "created_at": time,
+            "updated_at": time"
+            "episodes": [
+                {
+                    "id": integer,
+                    "season_id": integer,
+                    "title": string,
+                    "plot": text,
+                    "number": integer,
+                    "created_at": time,
+                    "updated_at": time"
+                }
+            ]
+        }    
+    ]
+}
+```
+
+Sample:
+
+```
+{
+    "seasons": [
+        {
+            "id": 101,
+            "title": "Quis soluta quae vel.",
+            "plot": "Tempore maiores quasi. Blanditiis et commodi. Ut doloremque dicta.",
+            "number": 1,
+            "created_at": "2023-03-06T17:26:16.945Z",
+            "updated_at": "2023-03-06T17:26:16.945Z",
+            "episodes": [
+                {
+                    "id": 1,
+                    "season_id": 101,
+                    "title": "Itaque laboriosam fuga sed.",
+                    "plot": "Fugit aut minima. Quia fuga aut.",
+                    "number": 1,
+                    "created_at": "2023-03-06T17:26:16.980Z",
+                    "updated_at": "2023-03-06T17:26:16.980Z"
+                }
+            ]
+        }    
+    ]
+}
+```
+
+### Endpoint to return a single list of movies and seasons, ordered by creation
+
+`http://localhost:3000/contents`
+
+Response:
+
+```
+{
+    "contents": [
+        {
+            "id": integer,
+            "title": string,
+            "plot": text,
+            "type": string,
+            "created_at": time,
+            "updated_at": time
+        }
+    ]
+}
+```
+
+Sample:
+
+```
+{
+    "contents": [
+        {
+            "id": 1,
+            "title": "Full Metal Jacket",
+            "plot": "Corrupti amet id. Vel eos dolore. Eaque omnis accusamus.",
+            "type": "Movie",
+            "created_at": "2023-03-06T17:26:15.768Z",
+            "updated_at": "2023-03-06T17:26:15.768Z"
+        }
+    ]
+}
+```
+
+### Endpoint for a user to perform a purchase of a content
+
+`http://localhost:3000/users/:id/purchase?{content}&{quality}
+
+Sample:
+
+`http://localhost:3000/users/1/purchase?content=1&quality=sd`
+
+#### Valid context
+
+Response:
+
+```
+{
+    "purchase": {
+        "id": integer,
+        "user": integer,
+        "purchase_option": integer,
+        "created_at": time,
+        "updated_at": time
+    }
+}
+```
+
+Sample:
+
+```
+{
+    "purchase": {
+        "id": 11,
+        "user": 1,
+        "purchase_option": 29,
+        "created_at": "2023-03-09T18:46:12.956Z",
+        "updated_at": "2023-03-09T18:46:12.956Z"
+    }
+}
+```
+
+#### Invalid context
+
+Response:
+
+```
+{
+    "content": [
+        string
+    ]
+}
+```
+
+Sample:
+
+```
+{
+    "content": [
+        "is already available in the user library"
+    ]
+}
+```
+
+### Endpoint to get the library of a user ordered by the remaining time to watch the content
+
+Response:
+
+```
+{
+    "string: [
+        {
+            string: {
+                "content": string,
+                "quality": string,
+                "expires": time
+            }
+        }
+    ]
+}
+```
+
+Sample:
+
+```
+{
+    "library": [
+        {
+            "movie": {
+                "content": "The Bourne Ultimatum",
+                "quality": "sd",
+                "expires": "2023-03-10T17:47:41.922Z"
+            }
+        }
+    ]
+}
+```
 
 ### Relations
 
