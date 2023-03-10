@@ -1,3 +1,72 @@
+**Table of Contents**
+
+- [The Problem](#the-problem)
+- [Solution](#solution)
+  - [Alternative solution](#alternative-solution)
+- [API](#api)
+  - [Endpoint to return the movies, ordered by creation](#endpoint-to-return-the-movies-ordered-by-creation)
+  - [Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number](#endpoint-to-return-the-seasons-ordered-by-creation-including-the-list-of-episodes-ordered-by-its-number)
+  - [Endpoint to return a single list of movies and seasons, ordered by creation](#endpoint-to-return-a-single-list-of-movies-and-seasons-ordered-by-creation)
+  - [Endpoint for a user to perform a purchase of a content](#endpoint-for-a-user-to-perform-a-purchase-of-a-content)
+    - [Valid context](#valid-context)
+    - [Invalid context](#invalid-context)
+  - [Endpoint to get the library of a user ordered by the remaining time to watch the content](#endpoint-to-get-the-library-of-a-user-ordered-by-the-remaining-time-to-watch-the-content)
+  - [Relations](#relations)
+  - [Validations](#validations)
+  - [Routing](#routing)
+  - [Database](#database)
+  - [Cache](#cache)
+  - [Testing](#testing)
+  - [Stats](#stats)
+- [System Requirements](#system-requirements)
+  - [Ruby version](#ruby-version)
+  - [Rails version](#rails-version)
+  - [Git version](#git-version)
+  - [RVM files](#rvm-files)
+  - [Database](#database-1)
+- [Get application](#get-application)
+- [Set up](#set-up)
+  - [RVM](#rvm)
+    - [Install Ruby](#install-ruby)
+    - [Create gemset](#create-gemset)
+  - [Install gems](#install-gems)
+  - [Database create, migrate and seed test data](#database-create-migrate-and-seed-test-data)
+  - [Get the appication up and running in development enviroment](#get-the-appication-up-and-running-in-development-enviroment)
+- [Testing](#testing-1)
+  - [Unit tests](#unit-tests)
+  - [Dependencies](#dependencies)
+  - [Run line test](#run-line-test)
+  - [Run file tests](#run-file-tests)
+  - [Run all tests](#run-all-tests)
+- [Development flow Guidelines](#development-flow-guidelines)
+  - [Assumptions](#assumptions)
+  - [Issues](#issues)
+  - [Projects](#projects)
+  - [Backlog Board](#backlog-board)
+    - [New](#new)
+    - [Backlog](#backlog)
+    - [Ready](#ready)
+    - [In progress](#in-progress)
+    - [In review](#in-review)
+    - [Done](#done)
+  - [Branching and Merging](#branching-and-merging)
+    - [develop](#develop)
+    - [release](#release)
+    - [main](#main)
+  - [Conventional Commits](#conventional-commits)
+    - [Example](#example)
+    - [Structural elements](#structural-elements)
+  - [Development](#development)
+    - [RVM](#rvm-1)
+    - [Rubocop](#rubocop)
+    - [Ruby on Rails Documentation](#ruby-on-rails-documentation)
+    - [Other development units recommendations](#other-development-units-recommendations)
+  - [Deployment](#deployment)
+    - [Dockerization](#dockerization)
+    - [On the server](#on-the-server)
+  - [Workflow](#workflow)
+
+
 ## The Problem
 
 "Backend Test" consists of creating a partial backend application with an exposed API to rent media content as part of a selection test for a streaming video company.
@@ -273,13 +342,40 @@ Tables, foreign keys, indexes, as well as attributes and field types were genera
 
 The database was populated through [Seed Data](https://guides.rubyonrails.org/active_record_migrations.html#migrations-and-seed-data) and using the [Faker](https://github.com/faker-ruby/faker) gem to generate fake data.
 
-### Caché
+### Cache
 
 [Rails Caching](https://guides.rubyonrails.org/caching_with_rails.html) with [Memory Store](https://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-memorystore) was used as a cache for the user library functionality which was enabled in the development and test environment. For a production environment it is recommended to use [Memory File](https://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-filestore), [Redis](https://redis.com), [Memcached](https://memcached.org), etc.
 
 ### Testing
 
 66 [Unit Test](https://en.wikipedia.org/wiki/Unit_testing) examples were described and developed in [RSpec](https://github.com/rspec/rspec-rails) testing `models`, `requests`, and `routing`.
+
+### Stats
+
+```
++----------------------+--------+--------+---------+---------+-----+-------+
+| Name                 |  Lines |    LOC | Classes | Methods | M/C | LOC/M |
++----------------------+--------+--------+---------+---------+-----+-------+
+| Controllers          |     54 |     44 |       5 |       8 |   1 |     3 |
+| Jobs                 |      7 |      2 |       1 |       0 |   0 |     0 |
+| Models               |    126 |    106 |       8 |       8 |   1 |    11 |
+| Mailers              |      4 |      4 |       1 |       0 |   0 |     0 |
+| Channels             |      8 |      8 |       2 |       0 |   0 |     0 |
+| Views                |     14 |     13 |       0 |       0 |   0 |     0 |
+| Libraries            |      0 |      0 |       0 |       0 |   0 |     0 |
+| Controller tests     |      0 |      0 |       0 |       0 |   0 |     0 |
+| Model tests          |      0 |      0 |       0 |       0 |   0 |     0 |
+| Mailer tests         |      0 |      0 |       0 |       0 |   0 |     0 |
+| Channel tests        |     11 |      3 |       1 |       0 |   0 |     0 |
+| Integration tests    |      0 |      0 |       0 |       0 |   0 |     0 |
+| Model specs          |    184 |    157 |       0 |       0 |   0 |     0 |
+| Request specs        |    143 |    110 |       0 |       0 |   0 |     0 |
+| Routing specs        |     40 |     35 |       0 |       0 |   0 |     0 |
++----------------------+--------+--------+---------+---------+-----+-------+
+| Total                |    591 |    482 |      18 |      16 |   0 |    28 |
++----------------------+--------+--------+---------+---------+-----+-------+
+  Code LOC: 177     Test LOC: 305     Code to Test Ratio: 1:1.7
+```
 
 ## System Requirements
 
