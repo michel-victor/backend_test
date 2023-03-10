@@ -3,14 +3,14 @@
 - [The Problem](#the-problem)
 - [Solution](#solution)
   - [Alternative solution](#alternative-solution)
-- [API](#api)
-  - [Endpoint to return the movies, ordered by creation](#endpoint-to-return-the-movies-ordered-by-creation)
-  - [Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number](#endpoint-to-return-the-seasons-ordered-by-creation-including-the-list-of-episodes-ordered-by-its-number)
-  - [Endpoint to return a single list of movies and seasons, ordered by creation](#endpoint-to-return-a-single-list-of-movies-and-seasons-ordered-by-creation)
-  - [Endpoint for a user to perform a purchase of a content](#endpoint-for-a-user-to-perform-a-purchase-of-a-content)
-    - [Valid context](#valid-context)
-    - [Invalid context](#invalid-context)
-  - [Endpoint to get the library of a user ordered by the remaining time to watch the content](#endpoint-to-get-the-library-of-a-user-ordered-by-the-remaining-time-to-watch-the-content)
+	- [API](#api)
+	  - [Endpoint to return the movies, ordered by creation](#endpoint-to-return-the-movies-ordered-by-creation)
+  	  - [Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number](#endpoint-to-return-the-seasons-ordered-by-creation-including-the-list-of-episodes-ordered-by-its-number)
+  	  - [Endpoint to return a single list of movies and seasons, ordered by creation](#endpoint-to-return-a-single-list-of-movies-and-seasons-ordered-by-creation)
+  	  - [Endpoint for a user to perform a purchase of a content](#endpoint-for-a-user-to-perform-a-purchase-of-a-content)
+         - [Valid context](#valid-context)
+    	  - [Invalid context](#invalid-context)
+  	  - [Endpoint to get the library of a user ordered by the remaining time to watch the content](#endpoint-to-get-the-library-of-a-user-ordered-by-the-remaining-time-to-watch-the-content)
   - [Relations](#relations)
   - [Validations](#validations)
   - [Routing](#routing)
@@ -85,11 +85,11 @@ An alternative solution to Single Table Inheritance (STI) could be a [Polymorphi
 
 ![Image](https://user-images.githubusercontent.com/20050874/224112550-c0934590-9ad0-4431-92e0-e544c03a8612.jpg)
 
-## API
+### API
 
 The export file of a [Postman Collection](https://github.com/michel-victor/backend_test/blob/develop/postman_collection.json) has been added to the project to facilitate the testing of the API.
 
-### Endpoint to return the movies, ordered by creation
+#### Endpoint to return the movies, ordered by creation
 
 `GET http://localhost:3000/movies`
 
@@ -125,7 +125,7 @@ Sample:
 }
 ```
 
-### Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number
+#### Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number
 
 `GET http://localhost:3000/seasons`
 
@@ -184,7 +184,7 @@ Sample:
 }
 ```
 
-### Endpoint to return a single list of movies and seasons, ordered by creation
+#### Endpoint to return a single list of movies and seasons, ordered by creation
 
 `GET http://localhost:3000/contents`
 
@@ -222,7 +222,7 @@ Sample:
 }
 ```
 
-### Endpoint for a user to perform a purchase of a content
+#### Endpoint for a user to perform a purchase of a content
 
 ```
 POST http://localhost:3000/users/:id/purchase
@@ -234,7 +234,7 @@ parameters:
 ```
 
 
-#### Valid context
+##### Valid context
 
 Response:
 
@@ -264,7 +264,7 @@ Sample:
 }
 ```
 
-#### Invalid context
+##### Invalid context
 
 Response:
 
@@ -286,7 +286,7 @@ Sample:
 }
 ```
 
-### Endpoint to get the library of a user ordered by the remaining time to watch the content
+#### Endpoint to get the library of a user ordered by the remaining time to watch the content
 
 `GET http://localhost:3000/users/:id/library`
 
