@@ -22,7 +22,7 @@ The export file of a [Postman Collection](https://github.com/michel-victor/backe
 
 ### Endpoint to return the movies, ordered by creation
 
-`http://localhost:3000/movies`
+`GET http://localhost:3000/movies`
 
 Response:
 
@@ -33,8 +33,8 @@ Response:
             "id": integer,
             "title": string,
             "plot": text,
-            "created_at": time,
-            "updated_at": time
+            "created_at": date_time,
+            "updated_at": date_time
         }
     ]
 }
@@ -58,7 +58,7 @@ Sample:
 
 ### Endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number
 
-`http://localhost:3000/seasons`
+`GET http://localhost:3000/seasons`
 
 Response:
 
@@ -70,8 +70,8 @@ Response:
             "title": string,
             "plot": text,
             "number": integer,
-            "created_at": time,
-            "updated_at": time"
+            "created_at": date_time,
+            "updated_at": date_time"
             "episodes": [
                 {
                     "id": integer,
@@ -79,8 +79,8 @@ Response:
                     "title": string,
                     "plot": text,
                     "number": integer,
-                    "created_at": time,
-                    "updated_at": time"
+                    "created_at": date_time,
+                    "updated_at": date_time"
                 }
             ]
         }    
@@ -103,7 +103,6 @@ Sample:
             "episodes": [
                 {
                     "id": 1,
-                    "season_id": 101,
                     "title": "Itaque laboriosam fuga sed.",
                     "plot": "Fugit aut minima. Quia fuga aut.",
                     "number": 1,
@@ -118,7 +117,7 @@ Sample:
 
 ### Endpoint to return a single list of movies and seasons, ordered by creation
 
-`http://localhost:3000/contents`
+`GET http://localhost:3000/contents`
 
 Response:
 
@@ -130,8 +129,8 @@ Response:
             "title": string,
             "plot": text,
             "type": string,
-            "created_at": time,
-            "updated_at": time
+            "created_at": date_time,
+            "updated_at": date_time
         }
     ]
 }
@@ -156,11 +155,15 @@ Sample:
 
 ### Endpoint for a user to perform a purchase of a content
 
-`http://localhost:3000/users/:id/purchase?{content}&{quality}
+```
+POST http://localhost:3000/users/:id/purchase
 
-Sample:
+parameters:
+	- content: integer
+	- quality: string
+	- in: body
+```
 
-`http://localhost:3000/users/1/purchase?content=1&quality=sd`
 
 #### Valid context
 
@@ -172,8 +175,8 @@ Response:
         "id": integer,
         "user": integer,
         "purchase_option": integer,
-        "created_at": time,
-        "updated_at": time
+        "created_at": date_time,
+        "updated_at": date_time
     }
 }
 ```
@@ -216,6 +219,8 @@ Sample:
 
 ### Endpoint to get the library of a user ordered by the remaining time to watch the content
 
+`GET http://localhost:3000/users/:id/library`
+
 Response:
 
 ```
@@ -225,7 +230,7 @@ Response:
             string: {
                 "content": string,
                 "quality": string,
-                "expires": time
+                "expires": date_time
             }
         }
     ]
