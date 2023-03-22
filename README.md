@@ -31,7 +31,7 @@
     - [Create gemset](#create-gemset)
   - [Install gems](#install-gems)
   - [Database create, migrate and seed test data](#database-create-migrate-and-seed-test-data)
-  - [Get the appication up and running in development enviroment](#get-the-appication-up-and-running-in-development-enviroment)
+  - [Get the application up and running in development environment](#get-the-application-up-and-running-in-development-environment)
 - [Testing](#testing-1)
   - [Unit tests](#unit-tests)
   - [Dependencies](#dependencies)
@@ -75,7 +75,7 @@
 
 The solution has been implemented on [Ruby on Rails](https://rubyonrails.org), following the [MVC](https://en.wikipedia.org/wiki/Model–view–controller) architectural pattern. [Unit testing](https://en.wikipedia.org/wiki/Unit_testing) were performed on [RSpec](https://rspec.info). A [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) [API](https://en.wikipedia.org/wiki/API) was developed using [JBuilder](https://github.com/rails/jbuilder) [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) for declaring [JSON](https://www.json.org/json-en.html) structures.
 
-After analyzing the problem, it was decided to use a [Single Table Inheritance (STI)](https://guides.rubyonrails.org/association_basics.html#single-table-inheritance-sti) architecture for purchable content.
+After analyzing the problem, it was decided to use a [Single Table Inheritance (STI)](https://guides.rubyonrails.org/association_basics.html#single-table-inheritance-sti) architecture for purchasable content.
 
 ![Image](https://user-images.githubusercontent.com/20050874/224112467-a4055f61-13fb-4327-b41f-59aa2e78289a.jpg)
 
@@ -442,7 +442,7 @@ If you want to restart the database run `rake db:reset` this throw command `rake
 > * You can find the test data generation in the [seed](https://github.com/michel-victor/backend_test/blob/main/db/seeds.rb) file.
 > * The [Faker](https://github.com/faker-ruby/faker) gem has been used to generate fake data.
 
-### Get the appication up and running in development enviroment
+### Get the application up and running in development environment
 
 `rails s`
 
